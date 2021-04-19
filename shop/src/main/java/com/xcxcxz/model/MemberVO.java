@@ -1,6 +1,5 @@
 package com.xcxcxz.model;
 
-import lombok.extern.log4j.Log4j;
 
 public class MemberVO {
 

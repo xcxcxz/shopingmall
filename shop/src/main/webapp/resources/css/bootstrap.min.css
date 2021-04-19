@@ -192,7 +192,7 @@ table {
 td, th {
 	padding: 0
 }
-	/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
 	*, :after, :before {
 		color: #000 !important;
@@ -1815,10 +1815,11 @@ pre code {
 	margin-right: auto;
 	margin-left: auto
 }
+
 .form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
 }
 
 @media ( min-width :768px) {
@@ -7204,4 +7205,14 @@ button.close {
 	.hidden-print {
 		display: none !important
 	}
+}
+/* 중복아이디 존재하지 않는경우 */
+.id_input_re_1 {
+	color: green;
+	display: none;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2 {
+	color: red;
+	display: none;
 }
