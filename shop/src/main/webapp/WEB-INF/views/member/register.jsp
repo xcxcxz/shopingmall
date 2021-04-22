@@ -44,11 +44,12 @@
 					<label class="sr-only">이메일</label> <input class="form-control"
 						name="memberMail" placeholder="이메일"> 
 						<span class="final_mail_ck">이메일을 입력해주세요.</span>
+						<sapn class="mail_input_box_warn"></sapn>
 				</div>
 				<div class="form-inline">
 					<div class="form-group">
 						<label class="sr-only">인증번호</label> <input class="form-control"
-							id="disabledInput" name="인증번호" placeholder="인증번호"
+							id="confirmNum" name="인증번호" placeholder="인증번호"
 							readonly="readonly"> <input type="button"
 							class="btn btn-sm btn-success" value="인증번호전송"></input>
 					</div>
@@ -66,12 +67,12 @@
 					</div>
 					<div class="form-group">
 						<label class="sr-only"></label> 
-						<input class="form-control"	name="memberAddr2" placeholder="주소" disabled="disabled">
+						<input class="form-control"	name="memberAddr2" placeholder="주소" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<input class="form-control" name="memberAddr3" placeholder="나머지주소" readonly="readonly">
 						<div class="pull-right">
-							<input type="button" class="btn btn-lg btn-success" value="가입하기"></input>
+							<input type="button" id="agree" class="btn btn-lg btn-success" value="가입하기"></input>
 						</div>
 					</div>
 				</div>
@@ -81,6 +82,6 @@
 	</div>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<%@ include file = "plugin/regPlugin.jsp" %>
+			<%@ include file = "plugin/regPlugin.jsp" %>
 </body>
 </html>

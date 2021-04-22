@@ -3,16 +3,20 @@ package com.xcxcxz.controller;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xcxcxz.model.MemberVO;
 import com.xcxcxz.service.MemberService;
@@ -28,6 +32,9 @@ public class MemberController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private BCryptPasswordEncoder pwEncoder;
 
 	// 회원가입 페이지 이동
 	@RequestMapping(value = "register", method = RequestMethod.GET)
@@ -40,13 +47,16 @@ public class MemberController {
 	// 회원가입
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String joinPOST(MemberVO member) throws Exception {
-
-		logger.info("register 진입");
-
-		// 회원가입 서비스 실행
-		memberservice.memberRegister(member);
-
-		logger.info("register Service 성공");
+		
+		String rawPw = "";
+		String encodePw = "";
+		
+		rawPw = member.getMemberPw();
+		encodePw = pwEncoder.encode(rawPw);
+		member.setMemberPw(encodePw);
+		
+		/* 회원가입 쿼리 실행 */
+        memberservice.memberRegister(member);
 
 		return "redirect:/main";
 
@@ -59,6 +69,7 @@ public class MemberController {
 		logger.info("로그인 페이지 진입");
 
 	}
+	
 
 	// 아이디 중복 검사
 	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
@@ -118,5 +129,25 @@ public class MemberController {
 
 		return num;
 	}
+	
+	/* 로그인 */
+    @RequestMapping(value="login", method=RequestMethod.POST)
+    public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
+        
+    	 HttpSession session = request.getSession();
+    	 MemberVO lvo = memberservice.memberLogin(member);
+    	 
+    	 if(lvo == null) {                                // 일치하지 않는 아이디, 비밀번호 입력 경우
+             
+             int result = 0;
+             rttr.addFlashAttribute("result", result);
+             return "redirect:/member/login";
+             
+         }
+         
+         session.setAttribute("member", lvo);             // 일치하는 아이디, 비밀번호 경우 (로그인 성공)
+         
+         return "redirect:/main";
+    }
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <script>
 		var code = ""; //이메일전송 인증번호 저장위한 코드
 
@@ -15,6 +15,7 @@
 		var mailnumCheck = false; // 이메일 인증번호 확인
 		var addressCheck = false // 주소
 
+		
 		$(document).ready(function() {
 			//회원가입 버튼(회원가입 기능 작동)
 			$('[value="가입하기"]').click(function() {
@@ -22,7 +23,7 @@
 				var pw = $("[name=memberPw]").val(); // 비밀번호 입력란
 				var pwck = $("[name=memberPwck]").val(); // 비밀번호 확인 입력란
 				var name = $("[name=memberName]").val(); // 이름 입력란
-				var mail = $("[name=member]").val(); // 이메일 입력란
+				var mail = $("[name=memberMail]").val(); // 이메일 입력란
 				var addr = $("[name=memberAddr3]").val(); // 주소 입력란
 				
 				/* 아이디 유효성검사 */
@@ -70,6 +71,8 @@
 		            mailCheck = true;
 		        }
 		        
+		        
+		        
 		        /* 주소 유효성 검사 */
 		        if(addr == ""){
 		            $('.final_addr_ck').css('display','block');
@@ -87,6 +90,7 @@
 				return false;
 			});
 		});
+		
 		//아이디 중복검사
 		$("input[name=memberId]").on(
 				"propertychange change keyup paste input",
@@ -118,19 +122,30 @@
 		$('[value="인증번호전송"]').click(function() {
 			var email = $('input[name=memberMail]').val(); // 입력한 이메일
 			var checkBox = $("input[name=인증번호]");
-			var boxWrap = $("input[name=인증번호]")
+			var warnMsg = $(".mail_input_box_warn");    // 이메일 입력 경고글
+			
+			/* 이메일 형식 유효성 검사 */
+		    if(mailFormCheck(email)){
+		        warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+		        warnMsg.css("display", "inline-block");
+		    } else {
+		        warnMsg.html("올바르지 못한 이메일 형식입니다.");
+		        warnMsg.css("display", "inline-block");
+		        return false;
+		    }    
+			
 			$.ajax({
 
 				type : "GET",
 				url : "mailCheck?email=" + email,
 				success : function(data) {
 
-					checkBox.attr("disabled", false);
+					checkBox.attr("readonly", false);
 					code = data;
 				}
 			});
 		});
-
+		
 		/* 인증번호 비교 */
 		$("input[name=인증번호]").blur(function() {
 
@@ -148,6 +163,8 @@
 			}
 
 		});
+
+		
 
 		/* 카카오 주소 연동 */
 		function execution_daum_address() {
@@ -206,9 +223,9 @@
 		
 		/* 비밀번호 확인 일치 유효성 검사 */
 		 
-		$('.pwck_input').on("propertychange change keyup paste input", function(){
-			var pw = $('.pw_input').val();
-		    var pwck = $('.pwck_input').val();
+		$("input[name=memberPwck]").on("propertychange change keyup paste input", function(){
+			var pw = $("input[name=memberPw]").val();
+		    var pwck = $("input[name=memberPwck]").val();
 		    $('.final_pwck_ck').css('display', 'none');
 		    
 		    if(pw == pwck){
@@ -221,5 +238,14 @@
 		        pwckcorCheck = false;
 		    }     
 		        
-		});    
+		});   
+		
+		/* 입력 이메일 형식 유효성 검사 */
+		 function mailFormCheck(email){
+			 var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+			 return form.test(email);
+		}
+		
+		 
 	</script>
+	

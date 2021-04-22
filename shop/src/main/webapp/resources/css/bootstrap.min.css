@@ -13,6 +13,7 @@ body {
 	margin: 0
 }
 
+
 article, aside, details, figcaption, figure, footer, header, hgroup,
 	main, menu, nav, section, summary {
 	display: block
@@ -1336,6 +1337,83 @@ body {
 	color: #333;
 	background-color: #fff
 }
+/* 유효성 검사 문구 */
+ 
+.final_id_ck{
+    display: none;
+    font-size: 10px;
+    color : red;
+}
+.final_pw_ck{
+    display: none;
+    font-size: 10px;
+    color : red;
+}
+.final_pwck_ck{
+    display: none;
+    font-size: 10px;
+    color : red;
+}
+.final_name_ck{
+    display: none;
+    font-size: 10px;
+    color : red;
+}
+.final_mail_ck{
+    display: none;
+    font-size: 10px;
+    color : red;
+}
+.final_addr_ck{
+    display: none;
+    font-size: 10px;
+    color : red;
+}
+/* 비밀번호 확인 일치 유효성검사 */
+.pwck_input_re_1{
+        color : green;
+        display : none; 
+        font-size: 10px;   
+}
+.pwck_input_re_2{
+        color : red;
+        display : none;   
+        font-size: 10px; 
+}    
+.login_warn{
+    margin-top: 20px;
+    text-align: center;
+    color : red;
+    font-size: 12px; 
+}
+/* 중복아이디 존재하지 않는경우 */
+.id_input_re_1 {
+	color: green;
+	font-size: 10px;
+	display: none;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2 {
+	color: red;
+	font-size: 10px;
+	display: none;
+}
+
+/* 로그인 성공 영역 */
+.login_success_area{
+    height: 62%;
+    width: 80%;
+    border: 2px solid #7474ad;
+    border-radius: 15px;
+    margin: 5% auto;
+    padding-top: 5%;
+}
+.login_success_area>span{
+    display : block;
+    text-align: left;
+    margin-left: 10%;
+}
+
 
 button, input, select, textarea {
 	font-family: inherit;
@@ -7206,16 +7284,6 @@ button.close {
 		display: none !important
 	}
 }
-/* 중복아이디 존재하지 않는경우 */
-.id_input_re_1 {
-	color: green;
-	display: none;
-}
-/* 중복아이디 존재하는 경우 */
-.id_input_re_2 {
-	color: red;
-	display: none;
-}
 .correct{
     color : green;
 }
@@ -7223,32 +7291,6 @@ button.close {
     color : red;
 }
  
-/* 유효성 검사 문구 */
- 
-.final_id_ck{
-    display: none;
-}
-.final_pw_ck{
-    display: none;
-}
-.final_pwck_ck{
-    display: none;
-}
-.final_name_ck{
-    display: none;
-}
-.final_mail_ck{
-    display: none;
-}
-.final_addr_ck{
-    display: none;
-}
-/* 비밀번호 확인 일치 유효성검사 */
-.pwck_input_re_1{
-        color : green;
-        display : none;    
-}
-.pwck_input_re_2{
-        color : red;
-        display : none;    
-}    
+
+
+

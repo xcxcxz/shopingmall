@@ -14,24 +14,18 @@
 		<property name="username" value="springuser"></property> <property name="password" 
 		value="1234"></property> </bean> -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<!-- <property name="driverClassName" value="oracle.jdbc.pool.OracleDataSource"></property> 
-			<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property> -->
 
-		<property name="driverClassName"
-			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
 		<property name="username" value="springuser"></property>
 		<property name="password" value="1234"></property>
 	</bean>
 
-	<bean id="datasource" class="com.zaxxer.hikari.HikariDataSource"
-		destroy-method="close">
+	<bean id="datasource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
 
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="datasource"></property>
 	</bean>
 
@@ -52,11 +46,8 @@
 		</property>
 	</bean>
 
-	<mybatis-spring:scan
-		base-package="com.xcxcxz.mapper" />
+	<mybatis-spring:scan base-package="com.xcxcxz.mapper" />
 
-	<context:component-scan
-		base-package="com.xcxcxz.model"></context:component-scan>
-	<context:component-scan
-		base-package="com.xcxcxz.service"></context:component-scan>
+	<context:component-scan	base-package="com.xcxcxz.model"></context:component-scan>
+	<context:component-scan	base-package="com.xcxcxz.service"></context:component-scan>
 </beans>
