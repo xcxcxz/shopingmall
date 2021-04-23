@@ -18,13 +18,13 @@
 		
 		$(document).ready(function() {
 			//회원가입 버튼(회원가입 기능 작동)
-			$('[value="가입하기"]').click(function() {
-				var id = $("[name=memberId]").val(); // id 입력란
-				var pw = $("[name=memberPw]").val(); // 비밀번호 입력란
-				var pwck = $("[name=memberPwck]").val(); // 비밀번호 확인 입력란
-				var name = $("[name=memberName]").val(); // 이름 입력란
-				var mail = $("[name=memberMail]").val(); // 이메일 입력란
-				var addr = $("[name=memberAddr3]").val(); // 주소 입력란
+			$(".join_button").click(function() {
+				var id = $('.id_input').val(); // id 입력란
+				var pw = $('.pw_input').val(); // 비밀번호 입력란
+				var pwck = $('.pwck_input').val(); // 비밀번호 확인 입력란
+				var name = $('.user_input').val(); // 이름 입력란
+				var mail = $('.mail_input').val(); // 이메일 입력란
+				var addr = $('.address_input_3').val(); // 주소 입력란
 				
 				/* 아이디 유효성검사 */
 		        if(id == ""){
@@ -92,14 +92,12 @@
 		});
 		
 		//아이디 중복검사
-		$("input[name=memberId]").on(
+		$('.id_input').on(
 				"propertychange change keyup paste input",
 				function() {
 
-					var memberId = $("input[name=memberId]").val(); // memberId에 입력되는 값
-					var data = {
-						memberId : memberId
-					} // '컨트롤에 넘길 데이터 이름' : '데이터(memberId에 입력되는 값)'
+					var memberId = $('.id_input').val(); // memberId에 입력되는 값
+					var data = {memberId : memberId} // '컨트롤에 넘길 데이터 이름' : '데이터(memberId에 입력되는 값)'
 
 					$.ajax({
 						type : "post",
@@ -119,9 +117,10 @@
 					}); // ajax 종료
 				});
 		/* 인증번호 이메일 전송 */
-		$('[value="인증번호전송"]').click(function() {
-			var email = $('input[name=memberMail]').val(); // 입력한 이메일
-			var checkBox = $("input[name=인증번호]");
+		$(".mail_check_button").click(function() {
+			var email = $(".mail_input").val(); // 입력한 이메일
+			var checkBox = $(".mail_check_input");
+			var boxWrap = $(".mail_check_input_box");
 			var warnMsg = $(".mail_input_box_warn");    // 이메일 입력 경고글
 			
 			/* 이메일 형식 유효성 검사 */
@@ -141,15 +140,16 @@
 				success : function(data) {
 
 					checkBox.attr("readonly", false);
+					boxWrap.attr("id", "mail_check_input_box_true");
 					code = data;
 				}
 			});
 		});
 		
 		/* 인증번호 비교 */
-		$("input[name=인증번호]").blur(function() {
+		$(".mail_check_input").blur(function() {
 
-			var inputCode = $("input[name=인증번호]").val(); // 입력코드    
+			var inputCode = $(".mail_check_input").val(); // 입력코드    
 			var checkResult = $("#mail_check_input_box_warn"); // 비교 결과 
 
 			if (inputCode == code) { // 일치할 경우
@@ -211,11 +211,11 @@
 							}
 
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							$("[name=memberAddr1]").val(data.zonecode); // 대체가능
-							$("[name=memberAddr2]").val(addr)
+							$(".address_input_1").val(data.zonecode); // 대체가능
+							$(".address_input_2").val(addr)
 							// 커서를 상세주소 필드로 이동한다.
-							$("[name=memberAddr3]").attr("readonly", false);
-							$("[name=memberAddr3]").focus();
+							$(".address_input_3").attr("readonly", false);
+							$(".address_input_3").focus();
 						}
 					}).open();
 
@@ -223,9 +223,9 @@
 		
 		/* 비밀번호 확인 일치 유효성 검사 */
 		 
-		$("input[name=memberPwck]").on("propertychange change keyup paste input", function(){
-			var pw = $("input[name=memberPw]").val();
-		    var pwck = $("input[name=memberPwck]").val();
+		$('.pwck_input').on("propertychange change keyup paste input", function(){
+			var pw = $('.pw_input').val();
+		    var pwck = $('.pwck_input').val();
 		    $('.final_pwck_ck').css('display', 'none');
 		    
 		    if(pw == pwck){
