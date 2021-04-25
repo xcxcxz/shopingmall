@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/resources/css/login.css">
+<link rel="stylesheet" href="/resources/css/member/login.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -47,7 +47,7 @@
 
 		$(".login_button").click(function() {
 			/* 로그인 메서드 서버 요청 */
-			$("#login_form").attr("action", "/member/login");
+			$("#login_form").attr("action", "/member/login.do");
 			$("#login_form").submit();
 
 		});

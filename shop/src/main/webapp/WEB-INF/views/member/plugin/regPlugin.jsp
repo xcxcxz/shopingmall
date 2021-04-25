@@ -84,8 +84,8 @@
 		        
 		        /* 최종 유효성 검사 */
 		        if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&mailCheck&&mailnumCheck&&addressCheck ){
-		        	$("#regestr_form").attr("action", "/member/register");
-					$("#regestr_form").submit();
+		        	$("#register_form").attr("action", "/member/register");
+					$("#register_form").submit();
 		        }    
 				return false;
 			});

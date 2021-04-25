@@ -132,7 +132,7 @@ public class MemberController {
 	}
 	
 	/* 로그인 */
-    @RequestMapping(value="login", method=RequestMethod.POST)
+    @RequestMapping(value="login.do", method=RequestMethod.POST)
     public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception{
         
     	HttpSession session = request.getSession();
@@ -179,6 +179,18 @@ public class MemberController {
         session.invalidate();
         
         return "redirect:/main";        
+        
+    }
+    
+    @RequestMapping(value="logout.do", method=RequestMethod.POST)
+    @ResponseBody
+    public void logoutPOST(HttpServletRequest request) throws Exception{
+        
+        logger.info("비동기 로그아웃 메서드 진입");
+        
+        HttpSession session = request.getSession();
+        
+        session.invalidate();
         
     }
 }
