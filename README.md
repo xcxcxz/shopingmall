@@ -23,3 +23,6 @@ PLUGIN - HTTP5, CSS, JS
 Error log 확인시 주소api 사용하여 addr2에 null값이 계속 들어가는것 확인.   
 register.jsp 확인시 disabled로 되어있음 확인. -> readonly로 변경   
 Fix완료   
+
+*2021/05/01
+팀프로젝트 진행으로 개인프로젝트 잠시 
