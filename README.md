@@ -31,13 +31,13 @@ Fix완료
 팀프로젝트 진행시 얻은 지식
 리스트를 뽑아낼 때 변수가 2개이상 필요시 Map을 사용하여 리스트에 값을 map으로 담는다.
 ex)
-'''java
+```java
 public List<ContentVO> smallcateList(String small_name, int on_off) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("small_name", small_name);
 		paramMap.put("on_off", on_off);
 		return sqlSessionTemplate.selectList("smallcateList", paramMap);
 	}
-'''
+```
 
 
